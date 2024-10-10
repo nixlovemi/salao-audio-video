@@ -2,8 +2,8 @@
 https://demos.adminmart.com/free/bootstrap/freedash-lite/src/html/index.html
 
 [LARAVEL]
-docker exec "php_ciclo_sgp" php artisan migrate:fresh --seed --database=pgsql_test
-docker exec "php_ciclo_sgp" php artisan make:component Alert --inline
+docker exec "php_audio_video" php artisan migrate:fresh --seed --database=pgsql_test
+docker exec "php_audio_video" php artisan make:component Alert --inline
 php artisan make:mail OrderShipped
 php artisan make:table:row:action MyNewRowAction
 php artisan make:model Employee -mfsc (model/factory/seeder/controller)
@@ -12,7 +12,7 @@ php artisan storage:link --relative
 
 [TABLE]
 - https://packagist.org/packages/okipa/laravel-table
-- docker exec "php_ciclo_sgp" php artisan make:table UsersTable [--model=App/Models/User]
+- docker exec "php_audio_video" php artisan make:table UsersTable [--model=App/Models/User]
 - Okipa\LaravelTable\Livewire\Table::refresh (error sometimes)
 
 [IN CASE OF ERROR]

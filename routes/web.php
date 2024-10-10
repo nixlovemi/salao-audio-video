@@ -32,4 +32,13 @@ Route::post('/doLogin', 'App\Http\Controllers\Login@doLogin')->name('site.doLogi
 // ================================================
 Route::middleware(['authWeb'])->group(function () {
     Route::get('/dashboard', 'App\Http\Controllers\Dashboard@index')->name('site.dashboard');
+
+    Route::prefix('people')->group(function () {
+        Route::get('/', 'App\Http\Controllers\People@index')->name('people.index');
+        Route::get('/view/{codedId}', 'App\Http\Controllers\People@view')->name('people.view');
+        Route::get('/add', 'App\Http\Controllers\People@add')->name('people.add');
+        Route::post('/doAdd', 'App\Http\Controllers\People@doAdd')->name('people.doAdd');
+        Route::get('/edit/{codedId}', 'App\Http\Controllers\People@edit')->name('people.edit');
+        Route::post('/doEdit', 'App\Http\Controllers\People@doEdit')->name('people.doEdit');
+    });
 });

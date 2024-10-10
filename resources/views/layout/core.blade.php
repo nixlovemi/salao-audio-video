@@ -14,7 +14,7 @@
         <link rel='stylesheet' href='{{ url('/') }}/base-reset.css' type='text/css' media='all' />
         <link rel='stylesheet' href='{{ url('/') }}/template/components/bootstrap/css/bootstrap.min.css' type='text/css' media='all' />
         <link rel='stylesheet' href='{{ url('/') }}/template/components/font-awesome-5/css/all.min.css' type='text/css' media='all' />
-        <link rel='stylesheet' href='{{ url('/') }}/base.css' type='text/css' media='all' />
+        <link rel='stylesheet' href='{{ url('/') }}/template/components/sweetalert2-11.14.0/sweetalert2.min.css' type='text/css' media='all' />
         <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
         <!--[if lt IE 9]>
@@ -32,6 +32,9 @@
         <!-- Custom styles for this template-->
         <link href="{{ url('/') }}/template/start-bootstrap/css/sb-admin-2.min.css" rel="stylesheet" />
         <link href="{{ url('/') }}/template/start-bootstrap/css/custom.css" rel="stylesheet" />
+
+        <!-- BASE CSS -->
+        <link rel='stylesheet' href='{{ url('/') }}/base.css' type='text/css' media='all' />
     </head>
 
     <body id="page-top">
@@ -44,13 +47,16 @@
 
         <!-- Core plugin JavaScript-->
         <script src="{{ url('/') }}/template/start-bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script>
+        <script src="{{ url('/') }}/template/components/sweetalert2-11.14.0/sweetalert2.all.min.js"></script>
 
         <!-- Custom scripts for all pages-->
         <script src="{{ url('/') }}/template/start-bootstrap/js/sb-admin-2.min.js"></script>
 
         @livewireScripts
         @yield('CORE_FOOTER_CUSTOM_JS')
-        <script src="{{ url('/') }}/base.js"></script>
         <script src="{{ url('/') }}/template/start-bootstrap/js/custom.js"></script>
+
+        <!-- BASE JS -->
+        <script src="{{ url('/') }}/base.js"></script>
     </body>
 </html>
