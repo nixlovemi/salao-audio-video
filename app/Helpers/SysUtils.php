@@ -10,6 +10,8 @@ final class SysUtils {
 
     private const ENCODE_FROM_CHARS = '+/=';
     private const ENCODE_TO_CHARS = '-;$';
+    private const SESSION_USER_ID = 'USER_ID';
+    private const SESSION_USER_NAME = 'USER_NAME';
 
     public static function checkLogin(string $password): bool
     {
@@ -22,33 +24,40 @@ final class SysUtils {
         return Auth::guard('web');
     }
 
+    public static function isLoggedIn(): bool
+    {
+        return self::getLoggedInUser() !== null;
+    }
+
     public static function loginUser(UserLogin $User): void
     {
-        $Auth = SysUtils::getWebAuth();
-        $Auth->login($User);
+        session()->put(self::SESSION_USER_ID, $User->getId());
+        session()->put(self::SESSION_USER_NAME, $User->getName());
     }
 
     public static function getLoggedInUser(): ?UserLogin
     {
-        return Auth::user();
+        if (!session()->has(self::SESSION_USER_ID) && !session()->has(self::SESSION_USER_NAME)) {
+            return null;
+        }
+
+        return new UserLogin(
+            session()->get(self::SESSION_USER_ID),
+            session()->get(self::SESSION_USER_NAME)
+        );
     }
 
-    /*
     public static function logout(bool $flushSession=true): void
     {
-        $User = SysUtils::getLoggedInUser();
-        if ($User) {
-            try {
-                SysUtils::getWebAuth()->logout();
-            } catch (\Throwable $th) { dd($th); }
-        }
+        // remove user data from session
+        session()->forget(self::SESSION_USER_ID);
+        session()->forget(self::SESSION_USER_NAME);
 
         if ($flushSession) {
             // flushing the session will remove CSRF Token's value
             session()->flush();
         }
     }
-    */
 
     public static function applyTimezone($date)
     {

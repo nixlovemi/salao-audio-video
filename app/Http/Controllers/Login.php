@@ -16,6 +16,7 @@ class Login extends Controller
 
     public function index()
     {
+        SysUtils::logout(false);
         return view('site-login', [
             'PAGE_TITLE' => 'Login',
         ]);
@@ -30,12 +31,10 @@ class Login extends Controller
 
         $User = UserLogin::login();
         SysUtils::loginUser($User);
-        if (!Auth::check()) {
+        if (!SysUtils::isLoggedIn()) {
             return $this->redirectWithError('site.login', 'Erro ao logar usuário!');
         }
 
-        return redirect()->route('site.login');
+        return redirect()->route('site.dashboard');
     }
-
-    // Auth::id()
 }

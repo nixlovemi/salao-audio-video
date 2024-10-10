@@ -33,16 +33,16 @@ View variables:
                                         <h1 class="h2">Login</h1>
                                         <h3 class="h4 mb-4">Áudio e Vídeo Esperança</h3>
                                     </div>
-                                    @include('layout.partials.alertReturnMessages')
+                                    @include('layout.partials.alert-return-messages')
                                     <form action="{{ route('site.doLogin') }}" class="user" method="POST">
                                         @csrf
 
                                         <div class="form-group">
-                                            <input type="password" id="f-password" name="f-password" class="form-control form-control-user" placeholder="Password" />
+                                            <input type="password" id="f-password" name="f-password" class="form-control form-control-user" placeholder="Senha" />
                                         </div>
 
                                         <button type="submit" class="btn btn-primary btn-user btn-block">
-                                            Login
+                                            Entrar
                                         </button>
                                     </form>
                                     <hr>
