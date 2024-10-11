@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Helpers\ModelValidation;
 use App\Helpers\ApiResponse;
 use Illuminate\Http\Request;
+use App\Models\Attendance;
 
 class People extends Model
 {
@@ -39,6 +40,13 @@ class People extends Model
     ];
 
     // relations
+    public function attendances()
+    {
+        return $this->hasMany(
+            Attendance::class, 'people_id',
+            'id'
+        );
+    }
     // =========
 
     // class functions

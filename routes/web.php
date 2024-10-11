@@ -41,4 +41,14 @@ Route::middleware(['authWeb'])->group(function () {
         Route::get('/edit/{codedId}', 'App\Http\Controllers\People@edit')->name('people.edit');
         Route::post('/doEdit', 'App\Http\Controllers\People@doEdit')->name('people.doEdit');
     });
+
+    Route::prefix('attendance')->group(function () {
+        Route::get('/', 'App\Http\Controllers\Attendance@index')->name('attendance.index');
+        Route::get('/view/{timestamp}', 'App\Http\Controllers\Attendance@view')->name('attendance.view');
+        Route::get('/add', 'App\Http\Controllers\Attendance@add')->name('attendance.add');
+        Route::post('/doAdd', 'App\Http\Controllers\Attendance@doAdd')->name('attendance.doAdd');
+        Route::get('/edit/{timestamp}', 'App\Http\Controllers\Attendance@edit')->name('attendance.edit');
+        Route::post('/doEdit', 'App\Http\Controllers\Attendance@doEdit')->name('attendance.doEdit');
+        Route::post('/ajaxFilterTable', 'App\Http\Controllers\Attendance@ajaxFilterTable')->name('attendance.ajaxFilterTable');
+    });
 });

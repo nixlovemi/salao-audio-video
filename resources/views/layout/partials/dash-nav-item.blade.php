@@ -1,21 +1,35 @@
-<!-- Menu Dashboard -->
-<li class="nav-item active">
-    <a class="nav-link" href="{{ route('site.dashboard') }}">
-        <i class="fas fa-fw fa-tachometer-alt"></i>
-        <span>Dashboard</span>
-    </a>
-</li>
+@php
+$arrMenu = [
+    'dashboard' => [
+        'route' => route('site.dashboard'),
+        'icon' => 'fas fa-fw fa-tachometer-alt',
+        'label' => 'Dashboard',
+    ],
+    'people' => [
+        'route' => route('people.index'),
+        'icon' => 'fas fa-users',
+        'label' => 'Pessoas',
+    ],
+    'attendance' => [
+        'route' => route('attendance.index'),
+        'icon' => 'fas fa-tasks',
+        'label' => 'Presença',
+    ],
+];
+@endphp
 
-<!-- Divider -->
-<hr class="sidebar-divider mb-0" />
+@foreach ($arrMenu as $menu)
+    @php
+    $isActive = strpos(Request::url(), $menu['route']) !== false;
+    @endphp
 
-<!-- Menu People -->
-<li class="nav-item active">
-    <a class="nav-link" href="{{ route('people.index') }}">
-        <i class="fas fa-users"></i>
-        <span>Pessoas</span>
-    </a>
-</li>
+    <li class="nav-item {{ $isActive ? 'active' : '' }}">
+        <a class="nav-link" href="{{ $menu['route'] }}">
+            <i class="{{ $menu['icon'] }}"></i>
+            <span>{{ $menu['label'] }}</span>
+        </a>
+    </li>
+    <hr class="sidebar-divider mb-0" />
+@endforeach
 
-<!-- Divider -->
-<hr class="sidebar-divider" />
+<span class="mb-4"></span>

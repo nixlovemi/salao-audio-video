@@ -2,6 +2,7 @@
 
 (function($) {
 
+    // BASE FUNCTIONS
     $(document).ready(function(){
         $(document).on('click', 'div.alert button.btn-close', function(e){
             $(this).parent().fadeOut(500);
@@ -64,28 +65,8 @@
         setTimeout(function(){
             // loadMaskMoney();
             // loadBootstrapSelect();
-            // loadDatePicker();
+            loadDatePicker();
         }, 250);
-    }
-
-    /*
-    function loadMaskMoney()
-    {
-        $(".jq-mask-money").maskMoney({
-            // prefix:'R$ ',
-            allowNegative: true,
-            thousands: '.',
-            decimal: ',',
-            // affixesStay: false
-        });
-    }
-
-    function loadBootstrapSelect()
-    {
-        $('.bootstrap-select').selectpicker({
-            style: '',
-            styleBase: 'form-select'
-        });
     }
 
     function loadDatePicker()
@@ -105,6 +86,26 @@
             firstDay:1
         });
     }
+
+    /*
+        function loadMaskMoney()
+        {
+            $(".jq-mask-money").maskMoney({
+                // prefix:'R$ ',
+                allowNegative: true,
+                thousands: '.',
+                decimal: ',',
+                // affixesStay: false
+            });
+        }
+
+        function loadBootstrapSelect()
+        {
+            $('.bootstrap-select').selectpicker({
+                style: '',
+                styleBase: 'form-select'
+            });
+        }
     */
 
     function showBootstrapModal(html)
@@ -214,6 +215,58 @@
             }
         });
     }
+    // ==============
+
+    // THEME
+    $(document).on('submit', 'form#frm-filter-attendance', function(e) {
+        e.preventDefault();
+        let FORM = $(this);
+        let CSRF = FORM.find('input[name="_token"]').val();
+
+        ajaxSetup(CSRF);
+        let formData = new FormData(this);
+
+        $.ajax({
+            type: 'POST',
+            url: FORM.attr('action'),
+            data: formData,
+            dataType: 'json',
+            processData: false, // required for FormData with jQuery
+            contentType: false, // required for FormData with jQuery
+            beforeSend: function() {
+                showLoader();
+                disableFormWhileSaving(FORM);
+                $('#attendance-list-table').html('Carregando ...');
+            },
+            success: function (retorno) {
+                if (retorno.error) {
+                    showErrorAlert({
+                        'title': 'Erro!',
+                        'text': retorno.message
+                    });
+                    return;
+                }
+
+                $('#attendance-list-table').html(retorno.data.html);
+                setTimeout(function(){
+                    loadJqueryComponents();
+                    initLivewireTable();
+                }, 250);
+            },
+            complete: function() {
+                closeLoader();
+                enableFormWhileSaving(FORM);
+            },
+            error: function (data) {
+                showErrorAlert({
+                    'title': 'Erro!',
+                    'text': 'Ocorreu um erro inesperado! Tente novamente.'
+                });
+                enableFormWhileSaving(FORM)
+            }
+        });
+    });
+    // =====
 
     // sweet alert
     /**

@@ -397,12 +397,3 @@ $USER = $mSysUtils::getLoggedInUser();
         <i class="fas fa-angle-up"></i>
     </a>
 @endsection
-
-@section('CRE_FOOTER_CUSTOM_JS')
-    <!-- Page level plugins -->
-    <script src="{{ url('/') }}/template/start-bootstrap/vendor/chart.js/Chart.min.js"></script>
-
-    <!-- Page level custom scripts -->
-    <script src="{{ url('/') }}/template/start-bootstrap/js/demo/chart-area-demo.js"></script>
-    <script src="{{ url('/') }}/template/start-bootstrap/js/demo/chart-pie-demo.js"></script>
-@endsection
