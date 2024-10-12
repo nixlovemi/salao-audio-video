@@ -69,7 +69,7 @@ $DATE_TIME2 = $DATE_TIME2 ?? time();
                     <div class="table-responsive">
                         <table class="table table-borderless">
                             <thead>
-                                <tr class="table-light border-top border-bottom">
+                                <tr class="table-light border-top border-bottom font-weight-bold">
                                     <th class="align-middle" scope="col">
                                         Pessoa
                                     </th>
