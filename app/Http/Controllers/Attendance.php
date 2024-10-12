@@ -106,4 +106,27 @@ class Attendance extends Controller
             ])
             ->withSuccess($response->getMessage());
     }
+
+    public function report(Request $request)
+    {
+        // can be null
+        $date1 = $request->input('f-date1');
+        $date2 = $request->input('f-date2');
+
+        // if not empty, convert to timestamp
+        if (!empty($date1) && !empty($date2)) {
+            $dt1 = DateTime::createFromFormat('d/m/Y', trim($date1));
+            $dt2 = DateTime::createFromFormat('d/m/Y', trim($date2));
+
+            $date1 = $dt1->getTimestamp();
+            $date2 = $dt2->getTimestamp();
+        }
+
+        return view('site-attendance-report', [
+            'PAGE_TITLE' => 'Relatório de Presença',
+            'DASH_PAGE_TITLE' => 'Relatório de Presença',
+            'DATE_TIME1' => $date1,
+            'DATE_TIME2' => $date2,
+        ]);
+    }
 }

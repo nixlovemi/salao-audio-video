@@ -15,6 +15,11 @@ $arrMenu = [
         'icon' => 'fas fa-tasks',
         'label' => 'Presença',
     ],
+    'attendanceReport' => [
+        'route' => route('attendance.report'),
+        'icon' => 'fas fa-print',
+        'label' => 'Relatório',
+    ],
 ];
 @endphp
 

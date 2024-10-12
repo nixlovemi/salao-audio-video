@@ -50,5 +50,6 @@ Route::middleware(['authWeb'])->group(function () {
         Route::get('/edit/{timestamp}', 'App\Http\Controllers\Attendance@edit')->name('attendance.edit');
         Route::post('/doEdit', 'App\Http\Controllers\Attendance@doEdit')->name('attendance.doEdit');
         Route::post('/ajaxFilterTable', 'App\Http\Controllers\Attendance@ajaxFilterTable')->name('attendance.ajaxFilterTable');
+        Route::match(array('GET','POST'),'/report', 'App\Http\Controllers\Attendance@report')->name('attendance.report');
     });
 });
