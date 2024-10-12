@@ -78,6 +78,9 @@ final class SysUtils {
         $replacedB64 = strtr($base64, self::ENCODE_FROM_CHARS, self::ENCODE_TO_CHARS);
         $rotStr = str_rot13($replacedB64);
 
+        // remove chars like %24 because they are not allowed in URL
+        $rotStr = preg_replace('/[^a-zA-Z0-9]/', '', $rotStr);
+
         return $rotStr;
     }
 
